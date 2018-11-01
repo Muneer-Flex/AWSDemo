@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.flex.apache.AWSDemo.config;
+package com.flex.apache.AWSDemo.config; 
 
 import static com.flex.apache.AWSDemo.util.AppConstants.ABOUT;
 import static com.flex.apache.AWSDemo.util.AppConstants.APP_NAME;
