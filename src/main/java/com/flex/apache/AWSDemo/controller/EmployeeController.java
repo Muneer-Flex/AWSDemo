@@ -5,13 +5,19 @@ package com.flex.apache.AWSDemo.controller;
 
 import static com.flex.apache.AWSDemo.util.AppConstants.CREATE_EMPLOYEE;
 import static com.flex.apache.AWSDemo.util.AppConstants.DELETE_EMPLOYEE;
+import static com.flex.apache.AWSDemo.util.AppConstants.EMPLOYEE;
 import static com.flex.apache.AWSDemo.util.AppConstants.ERROR_MSG;
+import static com.flex.apache.AWSDemo.util.AppConstants.HTTP_FORBIDDEN;
+import static com.flex.apache.AWSDemo.util.AppConstants.HTTP_NOT_FOUND;
+import static com.flex.apache.AWSDemo.util.AppConstants.HTTP_OK;
+import static com.flex.apache.AWSDemo.util.AppConstants.HTTP_UNAUTHORIZED;
 import static com.flex.apache.AWSDemo.util.AppConstants.LIST_EMPLOYEE;
 import static com.flex.apache.AWSDemo.util.AppConstants.UPDATE_EMPLOYEE;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.http.HttpStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,6 +30,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.flex.apache.AWSDemo.dao.Employee;
 import com.flex.apache.AWSDemo.service.EmployeeService;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+
 /**
  * This class is the controller for Employee Details.
  * 
@@ -32,11 +43,19 @@ import com.flex.apache.AWSDemo.service.EmployeeService;
  * 
  */
 @RestController
+@RequestMapping(EMPLOYEE)
+@Api(value="AWSDemo")
 public class EmployeeController {
 
 	@Autowired
 	private EmployeeService employeeService;
 	
+	@ApiOperation(value="List Employee", notes="This API is used to list down all the employees in DB")
+	@ApiResponses(value = {
+            @ApiResponse(code = HttpStatus.SC_OK, message = HTTP_OK),
+            @ApiResponse(code = HttpStatus.SC_UNAUTHORIZED, message = HTTP_UNAUTHORIZED),
+            @ApiResponse(code = HttpStatus.SC_FORBIDDEN, message = HTTP_FORBIDDEN),
+            @ApiResponse(code = HttpStatus.SC_NOT_FOUND, message = HTTP_NOT_FOUND) })
 	@RequestMapping(value = LIST_EMPLOYEE, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	public List<Employee> listEmployeeDetails() {
@@ -56,6 +75,12 @@ public class EmployeeController {
 		return empList;
 	}
 	
+	@ApiOperation(value="Create Employee", notes="This API is used to create & store the Employee details in DB")
+	@ApiResponses(value = {
+            @ApiResponse(code = HttpStatus.SC_OK, message = HTTP_OK),
+            @ApiResponse(code = HttpStatus.SC_UNAUTHORIZED, message = HTTP_UNAUTHORIZED),
+            @ApiResponse(code = HttpStatus.SC_FORBIDDEN, message = HTTP_FORBIDDEN),
+            @ApiResponse(code = HttpStatus.SC_NOT_FOUND, message = HTTP_NOT_FOUND) })
 	@RequestMapping(value=CREATE_EMPLOYEE, method=RequestMethod.POST, consumes= MediaType.APPLICATION_JSON_VALUE, produces=MediaType.TEXT_PLAIN_VALUE)
 	public String createEmployeeDetails(@RequestBody Employee employee) {
 
@@ -75,7 +100,13 @@ public class EmployeeController {
 		return result;
 	}
 	
-	@RequestMapping(value=UPDATE_EMPLOYEE, method=RequestMethod.PUT, consumes= MediaType.APPLICATION_JSON_VALUE, produces=MediaType.APPLICATION_JSON_VALUE)
+	@ApiOperation(value="Update Employee", notes="This API is used to update the Employee details in DB")
+	@ApiResponses(value = {
+            @ApiResponse(code = HttpStatus.SC_OK, message = HTTP_OK),
+            @ApiResponse(code = HttpStatus.SC_UNAUTHORIZED, message = HTTP_UNAUTHORIZED),
+            @ApiResponse(code = HttpStatus.SC_FORBIDDEN, message = HTTP_FORBIDDEN),
+            @ApiResponse(code = HttpStatus.SC_NOT_FOUND, message = HTTP_NOT_FOUND) })
+	@RequestMapping(value=UPDATE_EMPLOYEE, method=RequestMethod.PUT, consumes= MediaType.APPLICATION_JSON_VALUE, produces=MediaType.TEXT_PLAIN_VALUE)
 	public String updateEmployeeDetails(@RequestBody Employee employee) {
 		
 		String result = null;
@@ -94,6 +125,12 @@ public class EmployeeController {
 		return result;
 	}
 	
+	@ApiOperation(value="Delete Employee", notes="This API is used to delete the Employee details from DB")
+	@ApiResponses(value = {
+            @ApiResponse(code = HttpStatus.SC_OK, message = HTTP_OK),
+            @ApiResponse(code = HttpStatus.SC_UNAUTHORIZED, message = HTTP_UNAUTHORIZED),
+            @ApiResponse(code = HttpStatus.SC_FORBIDDEN, message = HTTP_FORBIDDEN),
+            @ApiResponse(code = HttpStatus.SC_NOT_FOUND, message = HTTP_NOT_FOUND) })
 	@RequestMapping(value=DELETE_EMPLOYEE, method=RequestMethod.DELETE, produces=MediaType.TEXT_PLAIN_VALUE)
 	@ResponseBody
 	public String deleteEmployeeDetails(@RequestParam("empId") int empId) {

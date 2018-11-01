@@ -3,6 +3,7 @@
  */
 package com.flex.apache.AWSDemo.controller;
 
+import static com.flex.apache.AWSDemo.util.AppConstants.APP;
 import static com.flex.apache.AWSDemo.util.AppConstants.HEALTH_CHECK;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @PropertySource("classpath:application.properties")
+@RequestMapping(APP)
 public class AWSDemoController {
 
 	@Value("${appVersion}")
