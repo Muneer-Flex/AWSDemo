@@ -25,10 +25,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(APP)
 public class AWSDemoController {
 
-	@Value("${appVersion}")
+	@Value("${appName}")
 	private String appName;
 
-	@Value("${appName}")
+	@Value("${appVersion}")
 	private String appVersion;
 
 	@RequestMapping(value = HEALTH_CHECK, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)

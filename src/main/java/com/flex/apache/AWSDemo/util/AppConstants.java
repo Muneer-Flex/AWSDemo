@@ -37,11 +37,11 @@ public class AppConstants {
 	//Swagger Constants
 	public static final String SWAGGER_URL = "swagger-ui.html";
 	
-	public static final String APP_TITLE = "ACCOUNT MANAGEMENT";
+	public static final String APP_TITLE = "EMPLOYEE MANAGEMENT";
 	
 	public static final String VERSION = "1.0.0";
 	
-	public static final String APP_NAME = "Account-Management";
+	public static final String APP_NAME = "Employee-Management";
 	
 	public static final String ABOUT = "https://flex.com/about/";
 	
